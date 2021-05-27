@@ -1,0 +1,44 @@
+$height: 1080px;
+$width: 1920px;
+
+#App {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: "Radikal";
+    font-weight: normal;
+    height: $height;
+    width: $width;
+    color: #fff;
+    margin: auto;
+    position: relative;
+    background-color: $light;
+    overflow: hidden;
+    font-size: 26px;
+}
+
+.wrapper {
+    background: $light;
+    transform-origin: 50% 50%;
+}
+
+.text-primary {
+    color: $primary;
+}
+
+.btn--round {
+    height: 88px;
+    width: 88px;
+    border-radius: 100%;
+}
+
+.btn--primary {
+    background-color: $primary;
+}
+
+
+.page {
+    position: relative;
+    background-color: $dark;
+    height: $height;
+    width: $width;
+}
