@@ -4,7 +4,6 @@
         <h1 class="text-5xl action__text"><span class="text-primary">Tap to</span> begin</h1>
         <button @click="enter" class="btn--round mt-5 btn--primary"></button>
     </div>
-
     <video class="background" ref="introVideo">
         <source :src="require('@/assets/video/intro.mp4')" type="video/mp4">
     </video>
@@ -13,11 +12,6 @@
 
 <script>
 export default {
-    data: function () {
-        return {
-            //waiting: true
-        }
-    },
     // make home button reset to this index page
     methods: {
         enter() {
@@ -33,8 +27,7 @@ export default {
                 clipPath: 'circle(1200px at 27.5% 50%)',
                 duration: 1.5,
             })
-
-        this.$refs.introVideo.play()
+            this.$refs.introVideo.play()
         }
     },
     mounted() {
@@ -44,7 +37,6 @@ export default {
         setTimeout(() => {
             this.$gsap.to('.action .btn--round', { scale: 1.2, opacity: 0.9, yoyo: true, repeat: -1, duration: 1, delay: 2, ease: 'power2.inOut' })
         }, 1000);
-        //           
     }
 }
 </script>
