@@ -4,14 +4,12 @@
     <div class="pageContent clubSelect z-50">
 
         <div class="clubSelect__info" style="opacity: 0">
-            <button class="back btn--primary inline-block btn--round align-middle"></button>
+            <button class="back btn--primary inline-block btn--round align-middle" @click="selectClub(selected.id)"></button>
             <h1 class="back inline-block text-primary text-5xl pt-5 mb-5 ml-4 align-middle" @click="selectClub(selected.id)">Back</h1>
-
             <h1 class="info clubName text-primary text-7xl mt-12 mb-5">{{clubInfo.name}}</h1>
             <h2 class="info clubUse text-5xl mb-5">Whats is used for?</h2>
             <p class="info clubText" v-html="clubInfo.text"></p>
         </div>
-
         <div class="grid grid-cols-4">
             <div class="clubSelect__title col-span-1">
                 <h1 class="text-primary text-7xl chooseClub">Choose <br> a club</h1>
@@ -42,6 +40,12 @@ export default {
             selected: '',
         }
     },
+    beforeDestroy() {
+        this.$gsap.to('.wrapper', {
+            clipPath: 'circle(0px at 50% 50%)',
+            duration: 0.4,
+        })
+    },
     methods: {
         selectClub(club) {
             this.selected = document.getElementById(club)
@@ -62,14 +66,14 @@ export default {
             } else {
                 opacity = 1
                 pEvents = 'all'
-
+                this.selected.style.zIndex = '1'
                 this.$gsap.to(this.selected.children[1], { opacity: 1, delay: 0.8 })
                 this.$gsap.to(this.selected.children[2], { opacity: 1, delay: 0.6 })
                 this.$gsap.to('.chooseClub', { opacity: 1, x: 0, delay: 0.5 })
                 this.$gsap.to('.clubSelect__info', { opacity: 0 })
                 this.openImage.reverse().then(() => {
                     this.selected = ''
-                    this.selected.style.zIndex = '1'
+
                 })
             }
 
@@ -87,7 +91,6 @@ export default {
     },
     computed: {
         openImage() {
-
             return this.$gsap.to(this.selected, { right: 700, x: 300, top: 300, duration: 0.6, scale: 2.5, ease: 'inOut' }).reverse()
         },
         clubInfo() {
@@ -95,7 +98,8 @@ export default {
         }
     },
     mounted() {
-        this.$gsap.fromTo('.background', { opacity: 0 }, { opacity: 1, duration: 0.8 })
+        this.$gsap.fromTo('.background', { opacity: 0 }, { opacity: 1, duration: 0.8, delay: 1 })
+        this.$gsap.fromTo('.pageContent', { opacity: 0 }, { opacity: 1, duration: 0.8, delay: 1 })
     }
 }
 </script>

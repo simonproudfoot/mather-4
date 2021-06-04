@@ -2,6 +2,7 @@ export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
+  //ssr: false,
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'mather4',
@@ -42,7 +43,9 @@ export default {
   },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [
+    '~/plugins/mixins',
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,

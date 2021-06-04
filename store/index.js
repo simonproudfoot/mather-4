@@ -2,6 +2,8 @@ export const strict = false
 export const state = () => ({
     ready: false,
     waiting: true,
+
+    changeKey: 0, // triggers a refresh of components on route change
     clubTypes: [
         {
             name: 'Driver',
@@ -37,16 +39,34 @@ export const state = () => ({
         }
     ]
 })
+
+export const actions = {
+    async resetScreen({ commit }) {
+        try {
+            commit('setChangeKey')
+        } catch (e) {
+
+        } finally {
+            console.log('done')
+         
+        }
+    }
+}
+
 export const getters = {
     ready: state => state.ready,
     waiting: state => state.waiting,
-    clubTypes: state => state.clubTypes
+    clubTypes: state => state.clubTypes,
+    changeKey: state => state.changeKey
 }
 export const mutations = {
-    ready(state, val) {
+    setReady(state, val) {
         state.ready = val
     },
     setWaiting(state, val) {
         state.waiting = val
+    },
+    setChangeKey(state, val) {
+        state.changeKey++
     }
 }

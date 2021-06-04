@@ -18,7 +18,7 @@ $width: 1920px;
 
 .wrapper {
     background: $light;
-    transform-origin: 50% 50%;
+//    transform-origin: 50% 50%;
 }
 
 .text-primary {
@@ -35,7 +35,6 @@ $width: 1920px;
     background-color: $primary;
 }
 
-
 .page {
     position: relative;
     background-color: $dark;
@@ -43,11 +42,27 @@ $width: 1920px;
     width: $width;
 }
 
-.pageContent{
+.pageContent {
     height: $height;
     width: $width;
     position: absolute;
     top: 0;
     left: 0;
-   
+}
+
+
+.introRing {
+    position: absolute;
+    border: 100px #51508e solid;
+    pointer-events: none;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    height: 0;
+    width: 0;
+    z-index: 10;
+    border-radius: 100%;
+    opacity: 0;
 }
