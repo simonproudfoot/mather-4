@@ -2,8 +2,45 @@ export const strict = false
 export const state = () => ({
     ready: false,
     waiting: true,
-
     changeKey: 0, // triggers a refresh of components on route change
+    classicShots: [
+        {
+            yearLocation: '1970 / St Andrews',
+            name: 'Doug Sanders',
+            thumb: 'shots/screenshot.png',
+            video: ''
+        },
+        {
+            yearLocation: '2008 / Royal Birkdale',
+            name: 'Padraig Harrington',
+            thumb: 'shots/screenshot.png',
+            video: ''
+        },
+        {
+            yearLocation: '2004 / Royal Troon',
+            name: 'Todd Hamilton',
+            thumb: 'shots/screenshot.png',
+            video: ''
+        }, {
+            yearLocation: '2009 / Royal Lytham & St Annes',
+            name: 'Catriona Matthew',
+            thumb: 'shots/screenshot.png',
+            video: ''
+        },
+        {
+            yearLocation: '2002 / Muirfield',
+            name: 'Ernie Els',
+            thumb: 'shots/screenshot.png',
+            video: ''
+        },
+        {
+            yearLocation: '1995 / St Andrews ',
+            name: 'Costantino Rocca',
+            thumb: 'shots/screenshot.png',
+            video: ''
+        },
+
+    ],
     clubTypes: [
         {
             name: 'Driver',
@@ -48,7 +85,7 @@ export const actions = {
 
         } finally {
             console.log('done')
-         
+
         }
     }
 }
@@ -57,6 +94,7 @@ export const getters = {
     ready: state => state.ready,
     waiting: state => state.waiting,
     clubTypes: state => state.clubTypes,
+    classicShots: state => state.classicShots,
     changeKey: state => state.changeKey
 }
 export const mutations = {

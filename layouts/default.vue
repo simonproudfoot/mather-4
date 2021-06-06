@@ -2,7 +2,7 @@
 <div id="App">
     <span class="introRing"></span>
     <NuxtLink to="/main">
-        <button v-if="!$store.getters.waiting" class="btn--round mt-5 btn--primary enterMain"></button>
+        <img v-if="!$store.getters.waiting" :src="require('@/assets/img/button.svg')" class="btn--round mt-5 btn--primary enterMain">
     </NuxtLink>
     <div class="wrapper" :key="$store.getters.changeKey">
         <Nuxt v-if="ready" />
@@ -23,7 +23,7 @@ export default {
         if (!this.ready) {
             this.ready = true;
         }
-         this.$store.dispatch("resetScreen");
+        this.$store.dispatch("resetScreen");
     },
 
     watch: {

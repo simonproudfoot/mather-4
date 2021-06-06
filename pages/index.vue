@@ -4,7 +4,9 @@
         <h1 class="text-5xl action__text">
             <span class="text-primary">Tap to</span> begin
         </h1>
-        <button @click="enter" class="btn--round mt-5 btn--primary"></button>
+ 
+        <img :src="require('@/assets/img/button.svg')" @click="enter" class="m-auto btn--round mt-5 btn--primary">
+       
     </div>
     <video class="background" ref="introVideo">
         <source :src="require('@/assets/video/intro.mp4')" type="video/mp4" />
