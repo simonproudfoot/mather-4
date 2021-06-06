@@ -57,12 +57,14 @@ $width: 1920px;
     pointer-events: none;
     top: 0;
     bottom: 0;
+    transform-origin: center;
     left: 0;
     right: 0;
     margin: auto;
     height: 0;
     width: 0;
     z-index: 10;
+    
     border-radius: 100%;
     opacity: 0;
 }

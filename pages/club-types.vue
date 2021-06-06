@@ -4,18 +4,18 @@
     <div class="pageContent clubSelect z-50">
 
         <div class="clubSelect__info" style="opacity: 0">
-            <button class="back btn--primary inline-block btn--round align-middle" @click="selectClub(selected.id)"></button>
+            <img :src="require('@/assets/img/button.svg')" class="back btn--primary inline-block btn--round align-middle" @click="selectClub(selected.id)">
             <h1 class="back inline-block text-primary text-5xl pt-5 mb-5 ml-4 align-middle" @click="selectClub(selected.id)">Back</h1>
             <h1 class="info clubName text-primary text-7xl mt-12 mb-5">{{clubInfo.name}}</h1>
             <h2 class="info clubUse text-5xl mb-5">Whats is used for?</h2>
             <p class="info clubText" v-html="clubInfo.text"></p>
         </div>
+
         <div class="grid grid-cols-4">
             <div class="clubSelect__title col-span-1">
                 <h1 class="text-primary text-7xl chooseClub">Choose <br> a club</h1>
             </div>
             <div class="col-span-3">
-
                 <div class="grid grid-cols-3">
 
                     <div v-for="(club, i) in $store.getters.clubTypes" class="clubSelect__club p-3" :key="i" @click="selectClub(club.name.replace(' ','_'))" :id="club.name.replace(' ','_')">
@@ -101,6 +101,10 @@ export default {
     mounted() {
         this.$gsap.fromTo('.background', { opacity: 0 }, { opacity: 1, duration: 0.8, delay: 1 })
         this.$gsap.fromTo('.pageContent', { opacity: 0 }, { opacity: 1, duration: 0.8, delay: 1 })
+        this.$nextTick(() => {
+            this.$gsap.fromTo('.btn--home', { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.8, delay: 1 })
+        })
+
     }
 }
 </script>
@@ -178,6 +182,10 @@ export default {
             left: 66px;
             padding-top: 100px;
         }
+    }
+
+    .back.btn--primary {
+        transform: rotate(180deg);
     }
 }
 </style>
