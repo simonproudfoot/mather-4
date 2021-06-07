@@ -1,8 +1,8 @@
 <template>
 <div class="page">
     <img :src="require('@/assets/img/background-2.png')" class="background" />
+    
     <div class="pageContent clubSelect z-50">
-
         <div class="clubSelect__info" style="opacity: 0">
             <img :src="require('@/assets/img/button.svg')" class="back btn--primary inline-block btn--round align-middle" @click="selectClub(selected.id)">
             <h1 class="back inline-block text-primary text-5xl pt-5 mb-5 ml-4 align-middle" @click="selectClub(selected.id)">Back</h1>
@@ -10,29 +10,23 @@
             <h2 class="info clubUse text-5xl mb-5">Whats is used for?</h2>
             <p class="info clubText" v-html="clubInfo.text"></p>
         </div>
-
         <div class="grid grid-cols-4">
             <div class="clubSelect__title col-span-1">
                 <h1 class="text-primary text-7xl chooseClub">Choose <br> a club</h1>
             </div>
             <div class="col-span-3">
                 <div class="grid grid-cols-3">
-
-                    <div v-for="(club, i) in $store.getters.clubTypes" class="clubSelect__club p-3" :key="i" @click="selectClub(club.name.replace(' ','_'))" :id="club.name.replace(' ','_')">
+                    <div v-for="(club, i) in $store.getters.clubTypes" class="clubSelect__club p-3" :key="i" @click="selectClub(club.name.replace(' ','_'), club.video)" :id="club.name.replace(' ','_')">
                         <img class="thumb" :src="require('@/assets/img/'+club.image)" :id="club.name.replace(' ','_')+'_img'">
                         <h2 class="text-primary text-4xl">{{club.name}}</h2>
                         <img :src="require('@/assets/img/button.svg')" class="btn--round btn--primary">
-
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
-
 </div>
 </template>
-
 <script>
 export default {
     data: function () {
@@ -48,12 +42,12 @@ export default {
         })
     },
     methods: {
-        selectClub(club) {
+        selectClub(club, video) {
             this.selected = document.getElementById(club)
             var opacity = null
             var pEvents = ''
-
             if (this.openImage.reversed()) {
+                this.$store.commit('setCurrentVideo', 'club_selection/' + video)
                 opacity = 0
                 pEvents = 'none'
                 this.selected.style.zIndex = '1000'
@@ -65,6 +59,7 @@ export default {
                 this.$gsap.from('.back', { opacity: 0, delay: 1 })
                 this.openImage.play()
             } else {
+                 this.$store.commit('setCurrentVideo', '')
                 opacity = 1
                 pEvents = 'all'
                 this.selected.style.zIndex = '1'
@@ -74,10 +69,8 @@ export default {
                 this.$gsap.to('.clubSelect__info', { opacity: 0 })
                 this.openImage.reverse().then(() => {
                     this.selected = ''
-
                 })
             }
-
             this.$gsap.to('.background', { opacity: opacity })
             var children = this.selected.parentElement.children;
             var idArr = [];
@@ -104,11 +97,9 @@ export default {
         this.$nextTick(() => {
             this.$gsap.fromTo('.btn--home', { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.8, delay: 1 })
         })
-
     }
 }
 </script>
-
 <style lang="scss">
 .clubOverlay {
     width: $width;
@@ -120,58 +111,46 @@ export default {
     top: 0;
     left: 0;
 }
-
 .clubSelect {
     padding: 6em 8.5em;
     width: $width;
     height: $height;
-
     &__info {
         width: 519px;
         position: absolute;
     }
-
     &__title {
         padding-top: 280px;
     }
-
     &__club {
         position: absolute;
-
         &:nth-of-type(2) {
             right: 565px
         }
-
         &:nth-of-type(3) {
             right: 175px;
         }
-
         &:nth-of-type(4) {
             top: 550px;
             right: 963px
         }
-
         &:nth-of-type(5) {
             top: 550px;
             right: 565px
         }
-
         &:nth-of-type(6) {
             top: 550px;
             right: 175px;
         }
-
         .thumb {
             height: 345px;
             widows: 345px;
         }
-
         .btn--primary {
             position: absolute;
             right: 25px;
             bottom: 0;
         }
-
         h2 {
             margin: 0;
             position: absolute;
@@ -183,7 +162,6 @@ export default {
             padding-top: 100px;
         }
     }
-
     .back.btn--primary {
         transform: rotate(180deg);
     }

@@ -4,9 +4,9 @@
         <h1 class="text-5xl action__text">
             <span class="text-primary">Tap to</span> begin
         </h1>
-        <img  :src="require('@/assets/img/button.svg')" @click="enter" class="m-auto btn--round mt-5 btn--primary">
+        <img :src="require('@/assets/img/button.svg')" @click="enter" class="m-auto btn--round mt-5 btn--primary">
     </div>
-    <video class="background" ref="introVideo">
+    <video class="background" ref="introVideo" muted @ended="$router.push('/main')"> 
         <source :src="require('@/assets/video/intro.mp4')" type="video/mp4" />
     </video>
 </div>
@@ -21,8 +21,8 @@ export default {
     },
 
     methods: {
-
         enter() {
+            this.$store.commit('setCurrentVideo', 'intro.mp4')
             this.introDone = true
             this.$gsap.to('.action .btn--round', { scale: 0.1, opacity: 0, duration: 0.8, ease: "elastic.out(0.4)" })
             this.$gsap.to('.action__text', { opacity: 0, duration: 0.8, ease: 'power2.out' })

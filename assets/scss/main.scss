@@ -9,16 +9,15 @@ $width: 1920px;
     height: $height;
     width: $width;
     color: #fff;
-    margin: auto;
     position: relative;
     background-color: $light;
-    overflow: hidden;
     font-size: 26px;
 }
 
 .wrapper {
     background: $light;
-//    transform-origin: 50% 50%;
+
+    //    transform-origin: 50% 50%;
 }
 
 .text-primary {
@@ -40,6 +39,7 @@ $width: 1920px;
     background-color: $dark;
     height: $height;
     width: $width;
+    overflow: hidden;
 }
 
 .pageContent {
@@ -49,7 +49,6 @@ $width: 1920px;
     top: 0;
     left: 0;
 }
-
 
 .introRing {
     position: absolute;
@@ -64,7 +63,87 @@ $width: 1920px;
     height: 0;
     width: 0;
     z-index: 10;
-    
+
     border-radius: 100%;
     opacity: 0;
+}
+
+.slide-fade-enter-active {
+    transition: all 0.3s ease;
+}
+.slide-fade-leave-active {
+    transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter, .slide-fade-leave-to
+  /* .slide-fade-leave-active below version 2.1.8 */ {
+    transform: translateX(10px);
+    opacity: 0;
+}
+
+.clubSelect {
+    padding: 6em 8.5em;
+    width: $width;
+    height: $height;
+
+    &__info {
+        width: 519px;
+        position: absolute;
+    }
+
+    &__title {
+        padding-top: 280px;
+    }
+
+    &__club {
+        position: absolute;
+
+        &:nth-of-type(2) {
+            right: 565px;
+        }
+
+        &:nth-of-type(3) {
+            right: 175px;
+        }
+
+        &:nth-of-type(4) {
+            top: 550px;
+            right: 963px;
+        }
+
+        &:nth-of-type(5) {
+            top: 550px;
+            right: 565px;
+        }
+
+        &:nth-of-type(6) {
+            top: 550px;
+            right: 175px;
+        }
+
+        .thumb {
+            height: 345px;
+            widows: 345px;
+        }
+
+        .btn--primary {
+            position: absolute;
+            right: 25px;
+            bottom: 0;
+        }
+
+        h2 {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+            width: 145px;
+            left: 66px;
+            padding-top: 100px;
+        }
+    }
+
+    .back.btn--primary {
+        transform: rotate(180deg);
+    }
 }
