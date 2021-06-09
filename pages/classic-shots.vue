@@ -88,69 +88,34 @@ export default {
         selectQuestion(x) {
             var scenerio = x + 1
             this.$store.commit('setCurrentVideo', '')
-
             this.questionStage++
             this.scenerio = scenerio
-            console.log(scenerio)
 
-            if (scenerio == 1) {
-                this.$store.commit('setCurrentVideo', 'scenario_1/scenario1-driver-question.mp4')
-            }
-            if (scenerio == 2) {
-                this.$store.commit('setCurrentVideo', 'scenario_2/scenario2-fairwaywood-question.mp4')
-            }
-            if (scenerio == 3) {
-                this.$store.commit('setCurrentVideo', 'scenario_3/scenario3-hybrid-question.mp4')
-            }
-            if (scenerio == 4) {
-                this.$store.commit('setCurrentVideo', 'scenario_4/scenario4-iron-question.mp4')
-            }
-            if (scenerio == 5) {
-                this.$store.commit('setCurrentVideo', 'scenario_5/scenario5-wedge-question.mp4')
-            }
-            if (scenerio == 6) {
-                this.$store.commit('setCurrentVideo', 'scenario_6/scenario6-putter-question.mp4')
-            }
+            var q = this.$store.getters.classicShots.find(x => x.scenerio === this.scenerio)
+    
+            this.$store.commit('setCurrentVideo', q.video)
+
+            // if (scenerio == 1) {
+            //     this.$store.commit('setCurrentVideo', 'scenario_1/scenario1-driver-question.mp4')
+            // }
+            // if (scenerio == 2) {
+            //     this.$store.commit('setCurrentVideo', 'scenario_2/scenario2-fairwaywood-question.mp4')
+            // }
+            // if (scenerio == 3) {
+            //     this.$store.commit('setCurrentVideo', 'scenario_3/scenario3-hybrid-question.mp4')
+            // }
+            // if (scenerio == 4) {
+            //     this.$store.commit('setCurrentVideo', 'scenario_4/scenario4-iron-question.mp4')
+            // }
+            // if (scenerio == 5) {
+            //     this.$store.commit('setCurrentVideo', 'scenario_5/scenario5-wedge-question.mp4')
+            // }
+            // if (scenerio == 6) {
+            //     this.$store.commit('setCurrentVideo', 'scenario_6/scenario6-putter-question.mp4')
+            // }
 
         },
-        // selectshot(shot) {
-        //     this.selected = document.getElementById(shot)
-        //     var opacity = null
-        //     var pEvents = ''
-        //     if (this.openImage.reversed()) {
-        //         opacity = 0
-        //         pEvents = 'none'
-        //         this.selected.style.zIndex = '1000'
-        //         this.$gsap.to(this.selected.children[1], { opacity: 0, duration: 0.2, })
-        //         this.$gsap.to(this.selected.children[2], { opacity: 0, duration: 0.2, delay: 0.2 })
-        //         this.$gsap.to('.chooseshot', { opacity: 0, x: -50 })
-        //         this.$gsap.to('.shotSelect__info', { opacity: 1, delay: 0 })
-        //         this.$gsap.from('.shotSelect__info .info', { x: -50, opacity: 0, stagger: 0.2, delay: 0.2 })
-        //         this.$gsap.from('.back', { opacity: 0, delay: 1 })
-        //         this.openImage.play()
-        //     } else {
-        //         opacity = 1
-        //         pEvents = 'all'
-        //         this.selected.style.zIndex = '1'
-        //         this.$gsap.to(this.selected.children[1], { opacity: 1, delay: 0.8 })
-        //         this.$gsap.to(this.selected.children[2], { opacity: 1, delay: 0.6 })
-        //         this.$gsap.to('.chooseshot', { opacity: 1, x: 0, delay: 0.5 })
-        //         this.$gsap.to('.shotSelect__info', { opacity: 0 })
-        //         this.openImage.reverse().then(() => {
-        //             this.selected = ''
-        //         })
-        //     }
-        //     this.$gsap.to('.background', { opacity: opacity })
-        //     var children = this.selected.parentElement.children;
-        //     var idArr = [];
-        //     for (var i = 0; i < children.length; i++) {
-        //         if (children[i].id !== this.selected.id) {
-        //             console.log(children[i].id)
-        //             this.$gsap.to('#' + children[i].id, { opacity: opacity })
-        //             document.getElementById(children[i].id).style.pointerEvents = pEvents
-        //         }
-        //     }
-        // }
+
     },
     computed: {
 

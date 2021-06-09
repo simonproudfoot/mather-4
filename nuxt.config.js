@@ -1,7 +1,13 @@
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
+  env: {
+    productionMode: 'apache'
+  },
 
+  router: {
+  //  base: '/ra/4.1'
+  },
   //ssr: false,
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -18,6 +24,8 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+
+
   
 
 
