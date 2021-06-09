@@ -9,7 +9,7 @@ Vue.mixin({
             var path = 'circle(850px at 50% 50%)'
             var center = 0
 
-            if (this.$nuxt.$route.name == 'club-types') {
+            if (this.$nuxt.$route.name == 'club-types' || this.$nuxt.$route.name == 'classic-shots') {
                 path = 'circle(1300px at 27.5% 50%)'
                 center = -60
             }

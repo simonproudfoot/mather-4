@@ -25,8 +25,8 @@
         <div class="clubSelect__info" style="opacity: 0">
             <img :src="require('@/assets/img/button.svg')" class="back btn--primary inline-block btn--round align-middle" @click="selectClub(selected.id)">
             <!-- <h1 class="back inline-block text-primary text-5xl pt-5 mb-5 ml-4 align-middle" @click="selectClub(selected.id)">Back</h1>
-            <h1 class="info clubName text-primary text-7xl mt-12 mb-5"></h1>
-            <h2 class="info clubUse text-5xl mb-5">Whats is used for?</h2> -->
+                <h1 class="info clubName text-primary text-7xl mt-12 mb-5"></h1>
+                <h2 class="info clubUse text-5xl mb-5">Whats is used for?</h2> -->
             <p class="info clubText"></p>
         </div>
         <div class="grid grid-cols-4">
@@ -47,12 +47,18 @@
     <div v-if="questionStage == 3" class="pageContent answer z-50">
 
         <div class="answer__content">
-            <h1 v-if="isCorrect">Correct</h1>
-            <h1 v-else>Incorrent</h1>
+            <h1 class="text-primary text-7xl" v-if="isCorrect">Correct</h1>
+            <h1 class="text-primary text-7xl" v-else>Incorrent</h1>
+            <p class="pt-10" v-html="answerContent"></p>
 
-            <p v-if="isCorrect" v-html="correctClub.correctContent"></p>
         </div>
-        <img class="clubImage" :src="require('@/assets/img/'+correctClub.image)">
+        <div class="answer__nav">
+        
+            <h1 class="text-primary text-5xl mr-2" v-if="isCorrect" @click="resetQ">Continue</h1>
+            <h1 class="text-primary text-5xl mr-2" v-else @click="resetQ">Try again</h1>
+                <img :src="require('@/assets/img/button.svg')" class="btn--round btn--primary" @click="resetQ">
+        </div>
+        <img class="clubImage" :src="require('@/assets/img/'+answerImage)">
     </div>
 
 </div>
@@ -76,6 +82,10 @@ export default {
         })
     },
     methods: {
+        resetQ() {
+            this.questionStage = 1
+            this.$store.commit('setCurrentVideo', '')
+        },
         answerQuestion(scen, name) {
             // change this if reordeing 
             this.questionStage++
@@ -84,41 +94,25 @@ export default {
             } else {
                 this.isCorrect = false
             }
+            var v = this.$store.getters.clubTypes.find(x => x.scenerio === this.scenerio)
+            var s = 'scenerio_' + scen
+
+            this.$store.commit('setCurrentVideo', '')
+            this.$store.commit('setCurrentVideo', v[s].video)
+
         },
         selectQuestion(x) {
             var scenerio = x + 1
             this.$store.commit('setCurrentVideo', '')
             this.questionStage++
             this.scenerio = scenerio
+            var q = this.$store.getters.classicShots.find(x => x.scenerio === this.scenerio).video
 
-            var q = this.$store.getters.classicShots.find(x => x.scenerio === this.scenerio)
-    
-            this.$store.commit('setCurrentVideo', q.video)
-
-            // if (scenerio == 1) {
-            //     this.$store.commit('setCurrentVideo', 'scenario_1/scenario1-driver-question.mp4')
-            // }
-            // if (scenerio == 2) {
-            //     this.$store.commit('setCurrentVideo', 'scenario_2/scenario2-fairwaywood-question.mp4')
-            // }
-            // if (scenerio == 3) {
-            //     this.$store.commit('setCurrentVideo', 'scenario_3/scenario3-hybrid-question.mp4')
-            // }
-            // if (scenerio == 4) {
-            //     this.$store.commit('setCurrentVideo', 'scenario_4/scenario4-iron-question.mp4')
-            // }
-            // if (scenerio == 5) {
-            //     this.$store.commit('setCurrentVideo', 'scenario_5/scenario5-wedge-question.mp4')
-            // }
-            // if (scenerio == 6) {
-            //     this.$store.commit('setCurrentVideo', 'scenario_6/scenario6-putter-question.mp4')
-            // }
-
+            this.$store.commit('setCurrentVideo', q)
         },
 
     },
     computed: {
-
         shotInfo() {
             return this.selected ? this.$store.getters.shotTypes.find(x => x.name == this.selected.id.replace('_', ' ')) : { name: '', text: '' }
         },
@@ -128,7 +122,15 @@ export default {
                 return this.$store.getters.clubTypes.find(x => x.scenerio === this.scenerio)
             }
         },
+        answerContent() {
+            var v = this.$store.getters.clubTypes.find(x => x.scenerio === this.scenerio)
+            var s = 'scenerio_' + this.scenerio
+            return v[s].text
+        },
+        answerImage() {
+            return this.$store.getters.clubTypes.find(x => x.scenerio === this.scenerio).image
 
+        },
     },
     mounted() {
         this.$gsap.fromTo('.background', { opacity: 0 }, { opacity: 1, duration: 0.8, delay: 1 })
@@ -211,11 +213,24 @@ export default {
 .answer {
     &__content {
         top: 50%;
-        transform: translateY(-50%);
+        transform: translateY(-80%);
         left: 180px;
         z-index: 1000;
         position: absolute;
-        width: 800px;
+        width: 600px;
+    }
+
+    &__nav {
+        position: absolute;
+        bottom: 195px;
+        width: 600px;
+        height: 100px;
+        left: 180px;
+
+        * {
+            display: inline-block;
+            vertical-align: middle;
+        }
     }
 
     .clubImage {
