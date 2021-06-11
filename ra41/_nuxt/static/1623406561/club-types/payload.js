@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/club-types", {data:[{}],fetch:{},mutations:[]});

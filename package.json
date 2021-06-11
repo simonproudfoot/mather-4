@@ -6,7 +6,9 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "duckpond": "DEPLOY_ENV=duckpond nuxt generate",
+    "onsite": "DEPLOY_ENV=onsite nuxt generate"
   },
   "dependencies": {
     "@nuxtjs/style-resources": "^1.0.0",
